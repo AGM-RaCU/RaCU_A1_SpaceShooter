@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
             transform.position = trans + Vector3.right * Time.deltaTime * velocity;
         }
 
-        if (trans = Screen.height)
+        if (trans.x = Screen.height)
         {
 
         }
