@@ -14,14 +14,8 @@ public class Player : MonoBehaviour
 
     void PlayerMovement()
     {
-
-    }
-
-    void Update()
-    {
-
         Vector3 trans = transform.position;
-        
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position = trans + Vector3.up * Time.deltaTime * velocity;
@@ -41,6 +35,16 @@ public class Player : MonoBehaviour
         {
             transform.position = trans + Vector3.right * Time.deltaTime * velocity;
         }
+
+        if (trans = Screen.height)
+        {
+
+        }
+    }
+
+    void Update()
+    {
+        PlayerMovement();
     }
 
 }
