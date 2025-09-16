@@ -10,29 +10,38 @@ public class Player : MonoBehaviour
     public Transform enemyTransform;
     public GameObject bombPrefab;
     public Transform bombsTransform;
-    public float speed;
+    public float maxSpeed = 1.0f;
+    public float accelerationTime = 1.0f;
+
+    private Vector3 velocity = Vector3.zero;
 
     void PlayerMovement()
     {
+        float acceleration = maxSpeed / accelerationTime;
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            transform.position += Vector3.up * Time.deltaTime * speed;
+            velocity += acceleration * Time.deltaTime * Vector3.up;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            transform.position += Vector3.down * Time.deltaTime * speed;
+            velocity += acceleration * Time.deltaTime * Vector3.down;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * Time.deltaTime * speed;
+            velocity += acceleration * Time.deltaTime * Vector3.left;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * Time.deltaTime * speed;
+            velocity += acceleration * Time.deltaTime * Vector3.right;
         }
+
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+
+        transform.position += velocity * Time.deltaTime;
     }
 
     void Update()
