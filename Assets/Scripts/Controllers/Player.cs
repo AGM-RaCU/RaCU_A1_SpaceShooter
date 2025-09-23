@@ -21,4 +21,26 @@ public class Player : MonoBehaviour
         Vector3 spawnPosition = transform.position + inOffset;
         Instantiate(bombPrefab, spawnPosition, Quaternion.identity);
     }
+
+    public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
+    {
+
+    }
+
+    public void SpawnBombOnRandomCorner(float inDistance)
+    {
+
+    }
+
+    public void WarpPlayer(Transform target, float ratio)
+    {
+
+    }
+
+    public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
+    {
+
+    }
+
+    
 }
