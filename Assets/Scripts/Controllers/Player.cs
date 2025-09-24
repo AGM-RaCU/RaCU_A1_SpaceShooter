@@ -8,7 +8,15 @@ public class Player : MonoBehaviour
     public List<Transform> asteroidTransforms;
     public Transform bombsTransform;
 
-    //[Header("Motion Properties")]
+    [Header("Motion Properties")]
+    float speed;
+    Vector3 velocity;
+    float maxSpeed;
+    float accelerationTime;
+
+    [Header("Bomb Properties")]
+    public float inBombSpacing;
+    public int inNumberOfBombs;
 
     [Header("Radar Properties")]
     public float greenCircleRadius = 1f;
@@ -22,13 +30,19 @@ public class Player : MonoBehaviour
             SpawnBombAtOffset(new Vector3(0, 1));
         }
 
-        //PlayerMovement();
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SpawnBombTrail(inBombSpacing, inNumberOfBombs);
+        }
+
+        PlayerMovement();
         PlayerRadar(greenCircleRadius, numberOfSides);
     }
 
     void PlayerMovement()
     {
-        
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+        transform.position += velocity * Time.deltaTime;
     }
 
     void SpawnBombAtOffset(Vector3 inOffset)
@@ -39,7 +53,11 @@ public class Player : MonoBehaviour
 
     public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
     {
-
+        for (int i = 0; i < inNumberOfBombs; i++)
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x, i * inBombSpacing, 0);
+            Instantiate(bombPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 
     public void SpawnBombOnRandomCorner(float inDistance)
@@ -57,7 +75,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void PlayerRadar(float greenCircleRadius, int numberOfSides)
+    void PlayerRadar(float greenCircleRadius, int numberOfSides)
     {
         float angleStep = 360f / numberOfSides;
         float radians = angleStep * Mathf.Deg2Rad;
