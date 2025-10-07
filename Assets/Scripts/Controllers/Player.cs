@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [Header("Bomb Properties")]
     public float inBombSpacing;
     public int inNumberOfBombs;
+    public float inDistance;
 
     [Header("Radar Properties")]
     public float greenCircleRadius = 1f;
@@ -35,12 +36,18 @@ public class Player : MonoBehaviour
             SpawnBombTrail(inBombSpacing, inNumberOfBombs);
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SpawnBombOnRandomCorner(inDistance);
+        }
+
         PlayerMovement();
         PlayerRadar(greenCircleRadius, numberOfSides);
     }
 
     void PlayerMovement()
     {
+        
         velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
         transform.position += velocity * Time.deltaTime;
     }
@@ -62,7 +69,9 @@ public class Player : MonoBehaviour
 
     public void SpawnBombOnRandomCorner(float inDistance)
     {
-
+        Vector3 CornerPos = new Vector3(Random.Range(-1, 2)*inDistance, Random.Range(1, -2)*inDistance, 0);
+        Vector3 spawnPos = new Vector3(transform.position.x + CornerPos.x, transform.position.y + CornerPos.y, 0);
+        Instantiate(bombPrefab, spawnPos, Quaternion.identity);
     }
 
     public void WarpPlayer(Transform target, float ratio)
