@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     public float greenCircleRadius = 1f;
     public int numberOfSides = 6;
 
+    [Header("Warp Drive Properties")]
+    public Transform target;
+    public float ratio = 1f;
+
     // Update is called once per frame
     void Update()
     {
@@ -39,6 +43,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             SpawnBombOnRandomCorner(inDistance);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            WarpPlayer(target, ratio);
         }
 
         PlayerMovement();
@@ -76,7 +85,7 @@ public class Player : MonoBehaviour
 
     public void WarpPlayer(Transform target, float ratio)
     {
-
+        transform.position = Vector3.Lerp(transform.position, target.position, ratio);
     }
 
     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
