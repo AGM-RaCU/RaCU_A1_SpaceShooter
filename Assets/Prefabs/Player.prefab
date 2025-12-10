@@ -129,4 +129,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d47aa4a8b38e97448c22dbfdc9e14da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HomingMissilePrefab: {fileID: 0}
+  enemyTransform: {fileID: 0}
+  bombPrefab: {fileID: 0}
+  asteroidTransforms: []
+  bombsTransform: {fileID: 0}
+  inBombSpacing: 0
+  inNumberOfBombs: 0
+  inDistance: 0
+  greenCircleRadius: 1
+  numberOfSides: 6
+  target: {fileID: 0}
+  ratio: 1
+  inMaxRange: 2.5
+  inAsteroids: []

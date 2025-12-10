@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
     public Transform target;
     public float ratio = 1f;
 
+    [Header("Detector Properties")]
+    public float inMaxRange = 2.5f;
+    public List<Transform> inAsteroids;
+
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour
 
         PlayerMovement();
         PlayerRadar(greenCircleRadius, numberOfSides);
+        DetectAsteroids(inMaxRange, asteroidTransforms);
     }
 
     void PlayerMovement()
@@ -90,7 +95,27 @@ public class Player : MonoBehaviour
 
     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
     {
+        foreach (Transform asteroid in inAsteroids)
+        {
+            float distance = Vector3.Distance(asteroid.position, transform.position);
+            //Debug.Log(distance);
 
+            Vector3 asteroidV = asteroid.position;
+            Vector3 playerV = transform.position;
+
+            //Vector3 directionV = playerV.normalized + asteroidV;
+            //Debug.Log(directionV);
+
+            if (inMaxRange >= distance)
+                {
+                //Debug.DrawLine(playerV, directionV, Color.red);
+                Debug.DrawLine(playerV, asteroidV, Color.red);
+            }
+        }
+        
+        //Transform currentTransform = inAsteroids[0];
+
+        //Debug.Log(currentTransform.position);
     }
 
     void PlayerRadar(float greenCircleRadius, int numberOfSides)
