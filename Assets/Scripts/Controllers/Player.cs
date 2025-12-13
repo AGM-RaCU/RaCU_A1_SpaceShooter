@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
     public Transform bombsTransform;
 
     [Header("Motion Properties")]
-    float speed;
-    Vector3 velocity;
-    float maxSpeed;
-    float accelerationTime;
+    private Vector3 velocity;
+    public float maxSpeed;
+    public float accelerationTime, decelerationTime;
+    private float acceleration, deceleration;
 
     [Header("Bomb Properties")]
     public float inBombSpacing;
@@ -30,6 +30,12 @@ public class Player : MonoBehaviour
     [Header("Detector Properties")]
     public float inMaxRange = 2.5f;
     public List<Transform> inAsteroids;
+
+    private void Start()
+    {
+        acceleration = maxSpeed / accelerationTime;
+        deceleration = maxSpeed / decelerationTime;
+    }
 
     // Update is called once per frame
     void Update()
@@ -61,9 +67,48 @@ public class Player : MonoBehaviour
 
     void PlayerMovement()
     {
+        Vector2 playerInput = Vector2.zero;
+        if(Input.GetKey(KeyCode.UpArrow))
+        {
+            playerInput += Vector2.up;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            playerInput += Vector2.down;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            playerInput += Vector2.left;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            playerInput += Vector2.right;
+        }
+
+        if(playerInput.magnitude > 0)
+        {
+            velocity += (Vector3)playerInput.normalized * acceleration * Time.deltaTime;
         
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-        transform.position += velocity * Time.deltaTime;
+            if(velocity.magnitude > maxSpeed)
+            {
+                velocity = velocity.normalized * maxSpeed;
+            }
+        }
+        else
+        {
+            Vector3 changeV = velocity.normalized * deceleration * Time.deltaTime;
+            if(changeV.magnitude > velocity.magnitude)
+            {
+                velocity = Vector3.zero;
+            }
+            else
+            {
+                velocity -= changeV;
+            }
+ 
+        }
+
+            transform.position += velocity * Time.deltaTime;
     }
 
     void SpawnBombAtOffset(Vector3 inOffset)
