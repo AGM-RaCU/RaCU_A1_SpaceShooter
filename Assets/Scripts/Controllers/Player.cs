@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerMovement();
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             SpawnBombAtOffset(new Vector3(0, 1));
@@ -70,8 +72,11 @@ public class Player : MonoBehaviour
             SpawnPowerups(radius, numberOfPowerups);
         }
 
-        PlayerMovement();
-        PlayerRadar(greenCircleRadius, numberOfSides);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerRadar(greenCircleRadius, numberOfSides);
+        }
+
         DetectAsteroids(inMaxRange, asteroidTransforms);
     }
 
