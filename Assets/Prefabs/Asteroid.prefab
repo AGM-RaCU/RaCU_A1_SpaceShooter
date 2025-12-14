@@ -132,3 +132,4 @@ MonoBehaviour:
   moveSpeed: 0.05
   arrivalDistance: 0.2
   maxFloatDistance: 2
+  target: {fileID: 7694187126867494600, guid: 0f481cdad9d6e5045a813b058243022a, type: 3}

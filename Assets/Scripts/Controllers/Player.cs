@@ -85,11 +85,11 @@ public class Player : MonoBehaviour
             playerInput += Vector2.right;
         }
 
-        if(playerInput.magnitude > 0)
+        if (playerInput.magnitude > 0)
         {
             velocity += (Vector3)playerInput.normalized * acceleration * Time.deltaTime;
         
-            if(velocity.magnitude > maxSpeed)
+            if (velocity.magnitude > maxSpeed)
             {
                 velocity = velocity.normalized * maxSpeed;
             }
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         else
         {
             Vector3 changeV = velocity.normalized * deceleration * Time.deltaTime;
-            if(changeV.magnitude > velocity.magnitude)
+            if (changeV.magnitude > velocity.magnitude)
             {
                 velocity = Vector3.zero;
             }
