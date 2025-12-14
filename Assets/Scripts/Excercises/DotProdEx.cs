@@ -6,11 +6,9 @@ public class DotProdEx : MonoBehaviour
 {
     public float redAngle = 60f;
     public float blueAngle = 30f;
-
     private Vector2 redVector = Vector2.zero;
     private Vector2 blueVector = Vector2.zero;
 
-    // Update is called once per frame
     void Update()
     {
         redVector = CalculateVectorFromAngle(redAngle);

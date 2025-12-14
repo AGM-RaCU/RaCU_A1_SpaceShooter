@@ -11,14 +11,11 @@ public class Moon : MonoBehaviour
     public float speed;
     public Transform target;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         transform.position = target.position + (transform.position - target.position).normalized * radius;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.O))

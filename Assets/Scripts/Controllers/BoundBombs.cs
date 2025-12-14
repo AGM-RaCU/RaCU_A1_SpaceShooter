@@ -13,8 +13,5 @@ public class BoundBombs : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, target.position, speedLimit*Time.deltaTime);
         Debug.DrawLine(transform.position, target.position, Color.red);
-
-
-
     }
 }

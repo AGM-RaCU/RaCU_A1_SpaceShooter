@@ -7,7 +7,6 @@ public class Turret : MonoBehaviour
     public float angularSpeed = 60f;
     public Transform target;
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 directionToTarget = (target.position - transform.position).normalized;

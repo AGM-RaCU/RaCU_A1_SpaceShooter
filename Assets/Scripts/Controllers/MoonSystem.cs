@@ -12,8 +12,5 @@ public class MoonSystem : MonoBehaviour
         float angleStep = angularSpeed * Time.deltaTime;
 
         transform.Rotate(0, 0, angleStep);
-
     }
-
-
 }

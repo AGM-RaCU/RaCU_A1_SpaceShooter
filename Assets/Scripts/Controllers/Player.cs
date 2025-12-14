@@ -78,8 +78,6 @@ public class Player : MonoBehaviour
             PlayerRadar(greenCircleRadius, numberOfSides);
         }
 
-   
-
         DetectAsteroids(inMaxRange, asteroidTransforms);
        
     }
@@ -162,24 +160,15 @@ public class Player : MonoBehaviour
         foreach (Transform asteroid in inAsteroids)
         {
             float distance = Vector3.Distance(asteroid.position, transform.position);
-            //Debug.Log(distance);
 
             Vector3 asteroidV = asteroid.position;
             Vector3 playerV = transform.position;
 
-            //Vector3 directionV = playerV.normalized + asteroidV;
-            //Debug.Log(directionV);
-
             if (inMaxRange >= distance)
-                {
-                //Debug.DrawLine(playerV, directionV, Color.red);
+            {
                 Debug.DrawLine(playerV, asteroidV, Color.red);
             }
         }
-        
-        //Transform currentTransform = inAsteroids[0];
-
-        //Debug.Log(currentTransform.position);
     }
 
     void PlayerRadar(float greenCircleRadius, int numberOfSides)
@@ -190,7 +179,6 @@ public class Player : MonoBehaviour
         List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfSides; i++)
         {
-
             float adjustment = radians * i;
             Vector3 point = new Vector3(Mathf.Cos(radians + adjustment), Mathf.Sin(radians + adjustment)) * greenCircleRadius;
             points.Add(point);
@@ -213,7 +201,6 @@ public class Player : MonoBehaviour
         List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < numberOfPowerups; i++)
         {
-
             float adjustment = radians * i;
             Vector3 point = new Vector3(Mathf.Cos(radians + adjustment), Mathf.Sin(radians + adjustment)) * radius;
             points.Add(point);
