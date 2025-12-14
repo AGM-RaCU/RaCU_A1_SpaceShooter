@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public float radius = 1f;
     public int numberOfPowerups = 6;
 
+
     private void Start()
     {
         acceleration = maxSpeed / accelerationTime;
@@ -77,7 +78,10 @@ public class Player : MonoBehaviour
             PlayerRadar(greenCircleRadius, numberOfSides);
         }
 
+   
+
         DetectAsteroids(inMaxRange, asteroidTransforms);
+       
     }
 
     void PlayerMovement()
@@ -201,7 +205,7 @@ public class Player : MonoBehaviour
         Debug.DrawLine(center + points[points.Count - 1], center + points[0], Color.green);
     }
 
-    public void SpawnPowerups (float radius, int numberOfPowerups)
+    public void SpawnPowerups(float radius, int numberOfPowerups)
     {
         float angleStep = 360f / numberOfPowerups;
         float radians = angleStep * Mathf.Deg2Rad;
@@ -215,14 +219,7 @@ public class Player : MonoBehaviour
             points.Add(point);
             Instantiate(powerupPrefab, transform.position + points[i], Quaternion.identity);
         }
-
-        //Vector3 center = transform.position;
-
-       // for (int i = 0; i < points.Count - 1; i++)
-        //{
-           // Debug.DrawLine(center + points[i], center + points[i + 1], Color.green);
-       // }
-        //Debug.DrawLine(center + points[points.Count - 1], center + points[0], Color.green);
     }
 
-}    
+}
+
