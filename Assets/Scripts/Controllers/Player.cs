@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     public Transform enemyTransform;
     public GameObject bombPrefab;
+    public GameObject powerupPrefab;
     public List<Transform> asteroidTransforms;
     public Transform bombsTransform;
 
@@ -31,6 +32,10 @@ public class Player : MonoBehaviour
     public float inMaxRange = 2.5f;
     public List<Transform> inAsteroids;
 
+    [Header("Powerup Properties")]
+    public float radius = 1f;
+    public int numberOfPowerups = 6;
+
     private void Start()
     {
         acceleration = maxSpeed / accelerationTime;
@@ -50,14 +55,19 @@ public class Player : MonoBehaviour
             SpawnBombTrail(inBombSpacing, inNumberOfBombs);
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             SpawnBombOnRandomCorner(inDistance);
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             WarpPlayer(target, ratio);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SpawnPowerups(radius, numberOfPowerups);
         }
 
         PlayerMovement();
@@ -184,6 +194,30 @@ public class Player : MonoBehaviour
             Debug.DrawLine(center + points[i], center +  points[i + 1], Color.green);
         }
         Debug.DrawLine(center + points[points.Count - 1], center + points[0], Color.green);
+    }
+
+    public void SpawnPowerups (float radius, int numberOfPowerups)
+    {
+        float angleStep = 360f / numberOfPowerups;
+        float radians = angleStep * Mathf.Deg2Rad;
+
+        List<Vector3> points = new List<Vector3>();
+        for (int i = 0; i < numberOfPowerups; i++)
+        {
+
+            float adjustment = radians * i;
+            Vector3 point = new Vector3(Mathf.Cos(radians + adjustment), Mathf.Sin(radians + adjustment)) * radius;
+            points.Add(point);
+            Instantiate(powerupPrefab, transform.position + points[i], Quaternion.identity);
+        }
+
+        //Vector3 center = transform.position;
+
+       // for (int i = 0; i < points.Count - 1; i++)
+        //{
+           // Debug.DrawLine(center + points[i], center + points[i + 1], Color.green);
+       // }
+        //Debug.DrawLine(center + points[points.Count - 1], center + points[0], Color.green);
     }
 
 }    
